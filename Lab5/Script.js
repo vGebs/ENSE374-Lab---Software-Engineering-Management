@@ -65,6 +65,7 @@ $(document).ready(function(){
         $('#task').remove();
     });
 
+    //Adandon task
     $(document).on("click", "#abandon" , function() {
 
         var div = document.createElement("div");
@@ -91,6 +92,7 @@ $(document).ready(function(){
         $('#claimedTask').remove();
     });
 
+    //Complete task
     $(document).on("click", "#checkBox" , function() {
 
         var outerDiv = document.createElement('div');
@@ -121,6 +123,7 @@ $(document).ready(function(){
         $("#claimedTask").remove();
     });
 
+    //remove tasks
     $(document).on("click", "#removeCompleted" , function() {
         $("#completedTask").remove();
     });
