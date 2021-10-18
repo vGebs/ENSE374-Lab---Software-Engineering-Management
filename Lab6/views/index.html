@@ -24,22 +24,22 @@
         data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
           <h1 class="display-4">Log in</h1>
-          <form action="">
-            <div class="mb-3">
-              <label for="formGroupExampleInput" class="form-label">
-                Email
-              </label>
-              <input type="text" class="form-control" id="formGroupExampleInput">
-            </div>
-            <div class="mb-3">
-              <label for="formGroupExampleInput2" class="form-label">
-                Password
-              </label>
-              <input type="password" class="form-control" id="formGroupExampleInput2">
-            </div>
-            <br>
-            <input type="submit" value="Log in" id="formButton">
+
+          <form action="/login" method="POST">
+            <fieldset>
+              <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <br>
+              <input type="submit" value="Log in" id="formButton">
+            </fieldset>
           </form>
+
         </div>
       </div>
     </div>
@@ -54,28 +54,24 @@
         data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
           <h1 class="display-4">Sign Up</h1>
-          <form action="">
+
+          <form action="/signup" method="post">
             <div class="mb-3">
-              <label for="formGroupExampleInput" class="form-label">
-                Email
-              </label>
-              <input type="text" class="form-control" id="formGroupExampleInput">
+              <label for="formGroupExampleInput" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3">
-              <label for="formGroupExampleInput2" class="form-label">
-                Password
-              </label>
-              <input type="password" class="form-control" id="formGroupExampleInput2">
+              <label for="formGroupExampleInput2" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="mb-3">
-              <label for="formGroupExampleInput" class="form-label">
-                Authentication
-              </label>
-              <input type="text" class="form-control" id="formGroupExampleInput">
+              <label for="formGroupExampleInput" class="form-label">Authentication</label>
+              <input type="text" class="form-control" id="auth" name="auth" required>
             </div>
             <br>
             <input type="submit" value="Sign up" id="formButton">
           </form>
+
         </div>
       </div>
     </div>
