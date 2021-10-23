@@ -1,0 +1,8 @@
+<%- include("layouts/header") -%>
+
+<%- include("partials/greet.ejs", { username : username }) -%>
+
+<p>My favourite fruits are:</p>
+<%- include("partials/list-module.ejs", { itemList : fruitList }) -%>
+
+<%- include("layouts/footer") -%>
