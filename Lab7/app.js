@@ -1,3 +1,4 @@
+const jsonFuncs = require('./public/json/jsonFunctions')
 const authService = require('./services/authService')
 const userModel = require('./public/models/user')
 const taskModel = require('./public/models/task')
@@ -20,7 +21,7 @@ const port = 3000
 
 
 // MARK: - GET ==============================================================================>
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { 
     res.sendFile(__dirname + "/views/index.html")
 })
 
@@ -36,10 +37,12 @@ app.post('/login', (req, res) => {
     if (!req.body.email || !req.body.password) {
         console.log("Form must not be empty")
     } else {
+        //jsonFuncs.saveTasksToJson(taskModel.tasks)
+ 
         if (authService.validateLogin(req.body.email, req.body.password)) {
             res.render("todo", {
-                username: `${req.body.email}`,
-                tasks:  `${taskModel.tasks}`
+                username: req.body.email,
+                tasks:  jsonFuncs.loadTasksFromJson()
             })
         } else {
             res.redirect('/')
@@ -54,7 +57,7 @@ app.post('/signup', (req, res) => {
     } else {
         if (authService.validateSignup(req.body.email, req.body.password, req.body.auth)) {
             res.render("todo", {
-                username: `${req.body.email}`
+                username: req.body.email
             })
         } else {
             res.redirect('/')

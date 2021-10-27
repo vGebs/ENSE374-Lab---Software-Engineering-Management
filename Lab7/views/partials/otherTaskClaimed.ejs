@@ -1,3 +1,11 @@
-<input class="form-control" type="text" value="This is a task claimed by someone else"
+<% 
+if(tasks.length > 0){
+    for(let task of tasks) {
+        if (JSON.stringify(task.isTaskDone) == "false" && JSON.stringify(task.claimingUser.uname) != '"vGebs"' && JSON.stringify(task.isTaskClaimed) == "true"){ 
+%>
+<input class="form-control" type="text"
+    value="<%=JSON.stringify(task.text) %> claimed by <%= JSON.stringify(task.claimingUser.uname)%>"
     aria-label="Disabled input example" disabled readonly>
 <br>
+
+<%  } } } %>

@@ -1,3 +1,10 @@
-<input class="form-control completed" type="text" value="This is a task claimed and completed by someone else"
+<% 
+if(tasks.length > 0){
+    for(let task of tasks) {
+        if (JSON.stringify(task.isTaskDone) == "true" && JSON.stringify(task.claimingUser.uname) != '"vGebs"'){ 
+%>
+<input class="form-control completed" type="text" value="<%= JSON.stringify(task.text) %>"
     aria-label="Disabled input example" disabled readonly>
 <br>
+
+<%  } } } %>

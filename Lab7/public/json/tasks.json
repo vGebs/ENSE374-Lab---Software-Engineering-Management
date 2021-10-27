@@ -1,0 +1,79 @@
+[
+  {
+    "id": "task1",
+    "text": "task1",
+    "state": "",
+    "creator": {
+      "uname": "vGebs",
+      "pword": "123"
+    },
+    "isTaskClaimed": false,
+    "claimingUser": "",
+    "isTaskDone": false,
+    "isTaskCleared": false
+  },
+  {
+    "id": "task2",
+    "text": "task2",
+    "state": "",
+    "creator": {
+      "uname": "vGebs",
+      "pword": "123"
+    },
+    "isTaskClaimed": true,
+    "claimingUser": {
+      "uname": "vGebs",
+      "pword": "123"
+    },
+    "isTaskDone": false,
+    "isTaskCleared": false
+  },
+  {
+    "id": "task3",
+    "text": "task3",
+    "state": "",
+    "creator": {
+      "uname": "vGebs2.0",
+      "pword": "321"
+    },
+    "isTaskClaimed": true,
+    "claimingUser": {
+      "uname": "vGebs2.0",
+      "pword": "321"
+    },
+    "isTaskDone": false,
+    "isTaskCleared": false
+  },
+  {
+    "id": "task4",
+    "text": "task4",
+    "state": "",
+    "creator": {
+      "uname": "vGebs",
+      "pword": "123"
+    },
+    "isTaskClaimed": true,
+    "claimingUser": {
+      "uname": "vGebs",
+      "pword": "123"
+    },
+    "isTaskDone": true,
+    "isTaskCleared": false
+  },
+  {
+    "id": "task5",
+    "text": "task5",
+    "state": "",
+    "creator": {
+      "uname": "vGebs2.0",
+      "pword": "321"
+    },
+    "isTaskClaimed": true,
+    "claimingUser": {
+      "uname": "vGebs2.0",
+      "pword": "321"
+    },
+    "isTaskDone": true,
+    "isTaskCleared": false
+  }
+]

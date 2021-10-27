@@ -1,8 +1,17 @@
+<% 
+if(tasks.length > 0){
+    for(let task of tasks) {
+        if (JSON.stringify(task.isTaskDone) == "true" && JSON.stringify(task.claimingUser.uname) == '"vGebs"'){ 
+%>
+<!-- <h1><%= JSON.stringify(task.creator.uname) %></h1> -->
 <div class="input-group mb-3">
     <div class="input-group-text">
         <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input"
             checked>
     </div>
     <input type="text" class="form-control" aria-label="Text input with checkbox"
-        placeholder="This is a task claimed and completed by me" aria-label="Disabled input example" disabled readonly>
+        placeholder="<%=JSON.stringify(task.text) %> completed by me"
+        aria-label="Disabled input example" disabled readonly>
 </div>
+
+<%  } } } %>
