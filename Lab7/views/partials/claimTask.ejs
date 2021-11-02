@@ -3,10 +3,21 @@ if(tasks.length > 0){
     for(let task of tasks) {
         if (JSON.stringify(task.isTaskClaimed) == "false"){ 
 %>
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="<%= JSON.stringify(task.text) %>" aria-label="Recipient's username"
-        aria-describedby="button-addon2" aria-label="Disabled input example" disabled readonly>
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Claim</button>
-</div>
+<form acion="/claimTask/<%= JSON.stringify(task) %>" method="POST">
+    <div class="claimTask">
+        <div class="input-group mb-3">
+            <input type="hidden" name="task" value="<%= JSON.stringify(task) %>" id="task">
 
+            <input type="text" class="form-control" name="claimed" value="<%= JSON.stringify(task.text) %>"
+                aria-label="Recipient's username" aria-describedby="button-addon2" disabled readonly>
+
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Claim</button>
+        </div>
+    </div>
+</form>
 <%  } } } %>
+
+<!-- <span type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2"
+                aria-label="Disabled input example" disabled readonly>
+                <%= JSON.stringify(task.text) %>
+            </span> -->

@@ -1,6 +1,7 @@
 const fs = require('fs')
 
 function saveTasksToJson(arr) {
+    //console.log(arr)
     var data = JSON.stringify(arr, null, 2)
     fs.writeFile('./public/json/tasks.json', data, finished)
 
