@@ -1,0 +1,17 @@
+<% 
+if(tasks.length > 0){
+    for(const task of tasks) {
+        if (task.isTaskDone == false && task.claimingUser == 0){ 
+%>
+<div class="input-group mb-3">
+    <div class="input-group-text">
+        <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+    </div>
+    <input type="text" class="form-control completed" aria-label="Text input with checkbox"
+        placeholder="<%=task.text %> claimed by me"
+        aria-label="Disabled input example" disabled readonly>
+
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Abandon</button>
+</div>
+
+<%  } } } %>

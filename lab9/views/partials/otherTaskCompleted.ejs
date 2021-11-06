@@ -1,0 +1,10 @@
+<% 
+if(tasks.length > 0){
+    for(const task of tasks) {
+        if (task.isTaskDone == true && task.claimingUser != 0){ 
+%>
+<input class="form-control completed" type="text" value="<%= task.text %>"
+    aria-label="Disabled input example" disabled readonly>
+<br>
+
+<%  } } } %>
