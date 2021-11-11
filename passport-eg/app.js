@@ -78,37 +78,40 @@ app.listen(port, () => {
 // 5. Register a user with the following code, which needs to be in the appropriate route
 // As in (3), be sure to use req.body.username and req.body.password, and ensure the 
 // html forms match these values as well
-app.post( "/register", (req, res) => {
-    console.log( "User " + req.body.username + " is attempting to register" );
-    User.register({ username : req.body.username }, 
-                    req.body.password, 
-                    ( err, user ) => {
-        if ( err ) {
-        console.log( err );
-            res.redirect( "/" );
-        } else {
-            passport.authenticate( "local" )( req, res, () => {
-                res.redirect( "/reviews" );
-            });
-        }
-    });
+app.post("/register", (req, res) => {
+    console.log("User " + req.body.username + " is attempting to register");
+    User.register({
+            username: req.body.username
+        },
+        req.body.password,
+        (err, user) => {
+            if (err) {
+                console.log(err);
+                res.redirect("/");
+            } else {
+                passport.authenticate("local")(req, res, () => {
+                    console.log("wtf")
+                    res.redirect("/reviews");
+                });
+            }
+        });
 });
 ////////////////////////////////////////////////////////////////////
 
 // 6. Log in users on the login route //////////////////////////////
-app.post( "/login", ( req, res ) => {
-    console.log( "User " + req.body.username + " is attempting to log in" );
-    const user = new User ({
+app.post("/login", (req, res) => {
+    console.log("User " + req.body.username + " is attempting to log in");
+    const user = new User({
         username: req.body.username,
         password: req.body.password
     });
-    req.login ( user, ( err ) => {
-        if ( err ) {
-            console.log( err );
-            res.redirect( "/" );
+    req.login(user, (err) => {
+        if (err) {
+            console.log(err);
+            res.redirect("/");
         } else {
-            passport.authenticate( "local" )( req, res, () => {
-                res.redirect( "/reviews" ); 
+            passport.authenticate("local")(req, res, () => {
+                res.redirect("/reviews");
             });
         }
     });
@@ -122,38 +125,40 @@ app.get("/", (req, res) => {
 
 // 7. Register get routes for reviews and add-review ///////////////
 //Your code will replace this section!
-app.get( "/reviews", async( req, res ) => {
+app.get("/reviews", async (req, res) => {
     console.log("A user is accessing the reviews route using get, and...");
-    if ( req.isAuthenticated() ){
+    if (req.isAuthenticated()) {
         try {
-            console.log( "was authorized and found:" );
+            console.log("was authorized and found:");
             const results = await Game.find();
-            console.log( results );
-            res.render( "reviews", { results : results });
-        } catch ( error ) {
-            console.log( error );
+            console.log(results);
+            res.render("reviews", {
+                results: results
+            });
+        } catch (error) {
+            console.log(error);
         }
     } else {
-        console.log( "was not authorized." );
-        res.redirect( "/" );
+        console.log("was not authorized.");
+        res.redirect("/");
     }
 });
 
-app.get( "/add-review", ( req, res ) => {
-    console.log( "A user is accessing the add-review page, and..." );
+app.get("/add-review", (req, res) => {
+    console.log("A user is accessing the add-review page, and...");
     if (req.isAuthenticated()) {
-        console.log( "was authorized" );
-        res.render( "add-review" );
+        console.log("was authorized");
+        res.render("add-review");
     } else {
-        console.log( "was not authorized" );
-        res.redirect( "/" ) 
+        console.log("was not authorized");
+        res.redirect("/")
     }
 });
 ////////////////////////////////////////////////////////////////////
 
 // 8. Logout ///////////////////////////////////////////////////////
-app.get( "/logout", ( req, res ) => {
-    console.log( "A user is logging out" );
+app.get("/logout", (req, res) => {
+    console.log("A user is logging out");
     req.logout();
     res.redirect("/");
 });
@@ -162,18 +167,18 @@ app.get( "/logout", ( req, res ) => {
 // 9. Submit a post to the database ////////////////////////////////
 // Note that in the username, we are using the username from the
 // session rather than the form
-app.post( "/submit", async( req, res ) => {
-    console.log( "User " + req.user.username + " is adding the review:" );
-    console.log( req.body )
+app.post("/submit", async (req, res) => {
+    console.log("User " + req.user.username + " is adding the review:");
+    console.log(req.body)
     const game = new Game({
-        userName:   req.user.username,
-        gameName:   req.body.gameName,
-        score:      parseInt( req.body.score ),
+        userName: req.user.username,
+        gameName: req.body.gameName,
+        score: parseInt(req.body.score),
         reviewText: req.body.reviewText
     });
 
     game.save();
 
-    res.redirect( "/reviews" );
+    res.redirect("/reviews");
 });
 ////////////////////////////////////////////////////////////////////

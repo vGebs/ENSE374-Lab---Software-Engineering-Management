@@ -1,6 +1,14 @@
 const userModel = require('../models/user')
 const taskModel = require('../models/task')
 
+const todo = (req, res) => {
+    console.log("A user is accessing the reviews route using get, and...");
+    if(req.isAuthenticated()){
+        console.log("All set homie")
+        res.send("blue")
+    }
+}
+
 const addTask = (req, res) => {
     console.log(req.body.taskText)
 
@@ -54,6 +62,7 @@ const purgeTasks = (req, res) => {
 }
 
 module.exports = {
+    todo,
     addTask,
     claimTask,
     abandonTask,
