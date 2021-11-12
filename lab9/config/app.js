@@ -1,6 +1,3 @@
-const session = require("express-session")
-const passport = require("passport")
-
 module.exports = function (app, express, session, passport) {
     app.use(express.urlencoded({
         extended: true
