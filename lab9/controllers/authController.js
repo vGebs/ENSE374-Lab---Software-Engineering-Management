@@ -4,8 +4,8 @@ const passportLocalMongoose = require("passport-local-mongoose")
 const authService = require('../services/authService')
 
 const signup = (req, res) => {
-    console.log("User " + req.body.username + " is attempting to register")
-
+    console.log("authController: User " + req.body.username + " is attempting to register")
+    
     const successPath = '/todo'
     const failurePath = '/'
 
@@ -13,7 +13,7 @@ const signup = (req, res) => {
 }
 
 const login = (req, res) => {
-    console.log("User " + req.body.username + " is attempting to log in");
+    console.log("authController: User " + req.body.username + " is attempting to log in")
 
     const successPath = '/todo'
     const failurePath = '/'
@@ -22,7 +22,7 @@ const login = (req, res) => {
 }
 
 const logout = (req, res) => {
-    console.log("User " + req.body.username + " is logging out")
+    console.log("authController: User " + req.body.username + " is logging out")
 
     //According to passport, .logout() never fails, so we only have a success path
     const successPath = '/'

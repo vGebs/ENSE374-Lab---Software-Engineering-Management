@@ -2,7 +2,7 @@ const userModel = require('../models/user')
 const taskModel = require('../models/task')
 
 const todo = (req, res) => {
-    console.log("A user is accessing the reviews route using get, and...");
+    console.log("A user is accessing the reviews route using get, and...")
     if (req.isAuthenticated()) {
         console.log("todoController: User is authenticated")
         res.send("blue")

@@ -7,22 +7,23 @@ const signup = (req, res, successPath, errorPath) => {
         username,
         password
     } = req.body
+
     try {
         validateSignup(username, password)
 
         User.register({
             username: req.body.username
-        }, req.body.password, (e, user) => {
-            if (e) {
-                throw e
+        }, req.body.password, (err, user) => {
+            if (err) {
+                throw err
             } else {
                 passport.authenticate("local")(req, res, () => {
                     res.redirect(successPath)
                 })
             }
         })
-    } catch (e) {
-        console.log('authService-Error: ' + e)
+    } catch (err) {
+        console.log('authService-Error: ' + err)
         res.redirect(errorPath)
     }
 }
@@ -39,19 +40,18 @@ const login = (req, res, successPath, errorPath) => {
         const user = new User({
             username: username,
             password: password
-        });
+        })
         req.login(user, (err) => {
             if (err) {
-                console.log(err)
-                res.redirect("/")
+                throw err
             } else {
                 passport.authenticate("local")(req, res, () => {
                     res.redirect(successPath)
                 })
             }
         })
-    } catch (e) {
-        console.log('authService-Error: ' + e)
+    } catch (err) {
+        console.log('authService-Error: ' + err)
         res.redirect(errorPath)
     }
 }
