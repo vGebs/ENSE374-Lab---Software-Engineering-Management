@@ -46,14 +46,6 @@ const todoRoutes = require('./routes/todoRoutes')
 // ====================================================>
 // ====================================================>
 
-app.get('/temp', (req, res) => {
-    console.log("A user is accessing the reviews route using get, and...");
-    if(req.isAuthenticated()){
-        console.log("All set homie")
-        res.send("blue")
-    }
-})
-
 app.use(authRoutes)
 app.use(todoRoutes)
 

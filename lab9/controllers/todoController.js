@@ -3,9 +3,11 @@ const taskModel = require('../models/task')
 
 const todo = (req, res) => {
     console.log("A user is accessing the reviews route using get, and...");
-    if(req.isAuthenticated()){
-        console.log("All set homie")
+    if (req.isAuthenticated()) {
+        console.log("todoController: User is authenticated")
         res.send("blue")
+    } else {
+        console.log("todoController: User is not authenticated")
     }
 }
 
