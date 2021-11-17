@@ -3,8 +3,8 @@
 <%- include("partials/greet", { username : username }) -%>
 
 <div class="container">
-    <%- include("partials/otherTaskClaimed", {tasks: tasks, username: username}) -%>
     <%- include("partials/otherTaskCompleted", {tasks: tasks, username: username}) -%>
+    <%- include("partials/otherTaskClaimed", {tasks: tasks, username: username}) -%>
     <%- include("partials/myCompletedTask", {tasks: tasks, username: username}) -%>
     <%- include("partials/myClaimedTask", {tasks: tasks, username: username}) -%>
     <%- include("partials/claimTask", {tasks: tasks, username: username}) -%>

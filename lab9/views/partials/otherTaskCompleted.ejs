@@ -1,9 +1,9 @@
 <% 
 if(tasks.length > 0){
     for(const task of tasks) {
-        if (task.isTaskDone == true && task.claimingUser != username){ 
+        if (task.isTaskDone == true && task.claimingUser != username && task.isTaskCleared == false){ 
 %>
-<input class="form-control completed" type="text" value="<%= task.text %>"
+<input class="form-control completed" type="text" value="<%= task.text %> completed by <%=task.claimingUser%>"
     aria-label="Disabled input example" disabled readonly>
 <br>
 
