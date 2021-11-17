@@ -5,10 +5,11 @@ const todoController = require('../controllers/todoController')
 
 router.get('/todo', todoController.todo)
 router.post('/addTask', todoController.addTask)
-router.get('/claimTask', todoController.claimTask)
-router.get('/abandonTask', todoController.abandonTask)
+router.post('/claimTask', todoController.claimTask)
+router.post('/abandonTask', todoController.abandonTask)
 router.post('/completeTask', todoController.completeTask)
 router.post('/unFinishTask', todoController.unFinishTask)
 router.post('/purgeTasks', todoController.purgeTasks)
+router.post('/viewCompleted', todoController.viewCompleted)
 
 module.exports = router

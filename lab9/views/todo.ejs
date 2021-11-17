@@ -9,6 +9,8 @@
     <%- include("partials/myClaimedTask", {tasks: tasks, username: username}) -%>
     <%- include("partials/claimTask", {tasks: tasks, username: username}) -%>
     <%- include("partials/addNewTask") -%>
+    <%- include("partials/removeCompleted", {tasks: tasks}) -%>
+    <%- include("partials/viewCompleted", {tasks: tasks}) -%>
 </div>
 
 <%- include("layouts/footer") -%>

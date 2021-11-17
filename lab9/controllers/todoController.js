@@ -15,7 +15,6 @@ const todo = async (req, res) => {
         try {
             const tasks = await taskService.readAllTasks()
             console.log("todoController: Got tasks")
-            console.log(tasks)
 
             res.render(successPath, {
                 username: req.session.uname,
@@ -46,7 +45,7 @@ const addTask = async (req, res) => {
     const path = "/todo"
 
     try {
-        await taskService.createTask(req, res, task)
+        await taskService.createTask(task)
         res.redirect(path)
     } catch (e) {
         res.redirect(path)
@@ -54,14 +53,14 @@ const addTask = async (req, res) => {
 }
 
 const claimTask = async (req, res) => {
-    console.log(req.query.taskID)
-    console.log(req.session.uname)
-
-    const filter = {id: req.query.taskID}
-    const update = {isTaskClaimed: true, claimingUser: req.session.uname}
+   
+    const update = {
+        isTaskClaimed: true,
+        claimingUser: req.session.uname
+    }
 
     try {
-        await taskService.updateTask(req, res, filter, update)
+        await taskService.updateTask(req.body.taskID, update)
         console.log('todoController: Successfully claimedTask')
         res.redirect('/todo')
     } catch (e) {
@@ -71,13 +70,14 @@ const claimTask = async (req, res) => {
 }
 
 const abandonTask = async (req, res) => {
-    console.log(req.query.taskID)
 
-    const filter = {id: req.query.taskID}
-    const update = {isTaskClaimed: false, claimingUser: ""}
+    const update = {
+        isTaskClaimed: false,
+        claimingUser: ""
+    }
 
     try {
-        await taskService.updateTask(req, res, filter, update)
+        await taskService.updateTask(req.body.taskID, update)
         console.log('todoController: Successfully abandonedTask')
         res.redirect('/todo')
     } catch (e) {
@@ -86,16 +86,71 @@ const abandonTask = async (req, res) => {
     }
 }
 
-const completeTask = (req, res) => {
+const completeTask = async (req, res) => {
 
+    const update = {
+        isTaskDone: true
+    }
+
+    try {
+        await taskService.updateTask(req.body.taskID, update)
+        console.log('todoController: Successfully completedTask')
+        res.redirect('/todo')
+    } catch (e) {
+        console.log('todoController-error: ' + e)
+        res.redirect('todo')
+    }
 }
 
-const unFinishTask = (req, res) => {
+const unFinishTask = async (req, res) => {
 
+    const update = {
+        isTaskDone: false
+    }
+
+    try {
+        await taskService.updateTask(req.body.taskID, update)
+        console.log('todoController: Successfully unFinishedTask')
+        res.redirect('/todo')
+    } catch (e) {
+        console.log('todoController-error: ' + e)
+        res.redirect('todo')
+    }
 }
 
-const purgeTasks = (req, res) => {
+const purgeTasks = async (req, res) => {
 
+    const filter = {isTaskDone: true}
+
+    const update = {
+        isTaskCleared: true
+    }
+
+    try {
+        await taskService.updateTasks(filter, update)
+        console.log('todoController: Successfully purgedTasks')
+        res.redirect('/todo')
+    } catch (e) {
+        console.log('todoController-error: ' + e)
+        res.redirect('todo')
+    }
+}
+
+const viewCompleted = async (req, res) => {
+    const filter = {isTaskCleared: true}
+
+    const update = {
+        isTaskCleared: false
+    }
+
+    try {
+        await taskService.updateTasks(filter, update)
+        console.log('todoController: Successfully unPurgedTasks')
+        res.redirect('/todo')
+    } catch (e) {
+        console.log('todoController-error: ' + e)
+        res.redirect('todo')
+    }
 }
 
 module.exports = {
@@ -105,5 +160,6 @@ module.exports = {
     abandonTask,
     completeTask,
     unFinishTask,
-    purgeTasks
+    purgeTasks,
+    viewCompleted
 }

@@ -1,0 +1,11 @@
+    <% 
+if(tasks.length > 0){
+    for(const task of tasks) {
+        if (task.isTaskDone == true && task.isTaskCleared == false){ 
+%>
+    <form action='/purgeTasks' method='post'>
+        <input type='submit' class="btn btn-outline-secondary" id="button-addon2" value='Remove Completed Tasks'>
+    </form>
+    <% 
+break } } } 
+%>

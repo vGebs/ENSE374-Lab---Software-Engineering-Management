@@ -3,15 +3,20 @@ if(tasks.length > 0){
     for(const task of tasks) {
         if (task.isTaskDone == false && task.claimingUser == username){ 
 %>
-<div class="input-group mb-3">
-    <div class="input-group-text">
-        <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-    </div>
-    <input type="text" class="form-control completed" aria-label="Text input with checkbox"
-        placeholder="<%=task.text %>"
-        aria-label="Disabled input example" disabled readonly>
 
-    <a href='/abandonTask?taskID=<%=task.id%>' class="btn btn-outline-secondary" id="button-addon2">Abandon</a>
+<div class="input-group mb-3">
+    <form action='/completeTask' method='post'>
+        <input type='hidden' name='taskID' value='<%=task.id%>'>
+        <input type='submit' class="btn btn-outline-secondary" id="button-addon2" value='Mark Done'>
+    </form>
+
+    <input type="text" class="form-control" id="doubleForm" aria-describedby="button-addon2"
+        placeholder="<%=task.text %>" aria-label="Disabled input example" disabled readonly>
+
+    <form action="/abandonTask" method='post'>
+        <input type='hidden' name='taskID' value='<%=task.id%>'>
+        <input type='submit' class="btn btn-outline-secondary" id="button-addon2" value='Abandon'>
+    </form>
 </div>
 
 <%  } } } %>

@@ -1,7 +1,7 @@
 const Task = require('../models/task')
 const mongoose = require('mongoose')
 
-const createTask = async (req, res, task) => {
+const createTask = async (task) => {
     try {
         await task.save()
         return
@@ -15,19 +15,30 @@ const readTasksFromUser = (req, res, id) => {
     
 }
 
-const readAllTasks = async (req, res) => {
+const readAllTasks = async () => {
     try {
         const tasks = await Task.find()
         console.log("taskService: Got tasks")
         return tasks 
     } catch (e) {
         console.log("taskService-erro: " + e)
+        throw e
     }
 }
 
-const updateTask = async (req, res, filter, update) => {
+const updateTask = async (id, update) => {
     try {
-        await Task.findOneAndUpdate(filter, update)
+        await Task.findByIdAndUpdate(id, update)
+        console.log('taskService: Successfully updated task')
+    } catch (e) {
+        console.log('taskService-error: ' + e)
+        throw e
+    }
+}
+
+const updateTasks = async (filter, update) => {
+    try {
+        await Task.updateMany(filter, update)
         console.log('taskService: Successfully updated task')
     } catch (e) {
         console.log('taskService-error: ' + e)
@@ -42,5 +53,6 @@ const deleteTask = (req, res) => {
 module.exports = {
     createTask,
     readAllTasks,
-    updateTask
+    updateTask,
+    updateTasks
 }
