@@ -6,7 +6,7 @@ if(tasks.length > 0){
 <form acion="/claimTask %>" method="POST">
     <div class="claimTask">
         <div class="input-group mb-3">
-            <input type="hidden" name="task" value="<%= task %>" id="task">
+            <input type="hidden" name="taskID" value="<%= task.id %>">
 
             <input type="text" class="form-control" name="claimed" value="<%= task.text %>"
                 aria-label="Recipient's username" aria-describedby="button-addon2" disabled readonly>
