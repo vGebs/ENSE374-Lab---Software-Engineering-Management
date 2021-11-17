@@ -16,6 +16,7 @@ const signup = (req, res, successPath, errorPath) => {
             if (err) {
                 throw err
             } else {
+                req.session.uname = req.body.username
                 passport.authenticate("local")(req, res, () => {
                     res.redirect(successPath)
                 })
@@ -44,6 +45,7 @@ const login = (req, res, successPath, errorPath) => {
             if (err) {
                 throw err
             } else {
+                req.session.uname = username
                 passport.authenticate("local")(req, res, () => {
                     res.redirect(successPath)
                 })

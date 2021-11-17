@@ -1,7 +1,7 @@
 <% 
 if(tasks.length > 0){
     for(const task of tasks) {
-        if (task.isTaskDone == false && task.claimingUser != 0 && task.isTaskClaimed == true){ 
+        if (task.isTaskDone == false && task.claimingUser != username && task.isTaskClaimed == true){ 
 %>
 <input class="form-control" type="text"
     value="<%=task.text %> claimed by another user"

@@ -1,54 +1,89 @@
-const userModel = require('../models/user')
-const taskModel = require('../models/task')
+const Task = require('../models/task')
+const taskService = require('../services/taskService')
+const User = require('../models/user')
 
-const todo = (req, res) => {
-    console.log("A user is accessing the reviews route using get, and...")
+const todo = async (req, res) => {
+
+    const successPath = "todo"
+    const failurePath = "/"
+
     if (req.isAuthenticated()) {
         console.log("todoController: User is authenticated")
-        res.send("blue")
+        //after we verify the user, we have to pull all tasks
+        //After we pull all tasks, we will render the the todo.ejs
+
+        try {
+            const tasks = await taskService.readAllTasks()
+            console.log("todoController: Got tasks")
+            console.log(tasks)
+
+            res.render(successPath, {
+                username: req.session.uname,
+                tasks: tasks
+            })
+        } catch (e) {
+            res.redirect(failurePath)
+        }
     } else {
         console.log("todoController: User is not authenticated")
+        res.redirect(failurePath)
     }
 }
 
-const addTask = (req, res) => {
+const addTask = async (req, res) => {
     console.log(req.body.taskText)
 
-    let task = {
+    let task = new Task({
         text: req.body.taskText,
         state: "",
-        creator: userModel.users[0],
+        creator: req.body.username,
         isTaskClaimed: false,
         claimingUser: "",
         isTaskDone: false,
         isTaskCleared: false
+    })
+
+    const path = "/todo"
+
+    try {
+        await taskService.createTask(req, res, task)
+        res.redirect(path)
+    } catch (e) {
+        res.redirect(path)
     }
-
-    let oldTasks = jsonFuncs.loadTasksFromJson()
-
-    oldTasks.push(task)
-
-    jsonFuncs.saveTasksToJson(oldTasks)
-
-    let tasks = jsonFuncs.loadTasksFromJson()
-
-    res.render("todo", {
-        username: req.body.email,
-        tasks: tasks
-    })
 }
 
-const claimTask = (req, res) => {
-    console.log(req.params.taskID)
+const claimTask = async (req, res) => {
+    console.log(req.query.taskID)
+    console.log(req.session.uname)
 
-    res.render("todo", {
-        username: req.body.email,
-        tasks: taskModel.tasks
-    })
+    const filter = {id: req.query.taskID}
+    const update = {isTaskClaimed: true, claimingUser: req.session.uname}
+
+    try {
+        await taskService.updateTask(req, res, filter, update)
+        console.log('todoController: Successfully claimedTask')
+        res.redirect('/todo')
+    } catch (e) {
+        console.log('todoController-error: ' + e)
+        res.redirect('todo')
+    }
 }
 
-const abandonTask = (req, res) => {
+const abandonTask = async (req, res) => {
+    console.log(req.query.taskID)
 
+    const filter = {id: req.query.taskID}
+    const update = {isTaskClaimed: false, claimingUser: ""}
+
+    try {
+        await taskService.updateTask(req, res, filter, update)
+        console.log('todoController: Successfully abandonedTask')
+        res.redirect('/todo')
+    } catch (e) {
+        console.log('todoController-error: ' + e)
+        res.redirect('todo')
+    }
 }
 
 const completeTask = (req, res) => {

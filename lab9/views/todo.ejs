@@ -3,11 +3,11 @@
 <%- include("partials/greet", { username : username }) -%>
 
 <div class="container">
-    <%- include("partials/otherTaskClaimed", {tasks: tasks}) -%>
-    <%- include("partials/otherTaskCompleted", {tasks: tasks}) -%>
-    <%- include("partials/myCompletedTask", {tasks: tasks}) -%>
-    <%- include("partials/myClaimedTask", {tasks: tasks}) -%>
-    <%- include("partials/claimTask", {tasks: tasks}) -%>
+    <%- include("partials/otherTaskClaimed", {tasks: tasks, username: username}) -%>
+    <%- include("partials/otherTaskCompleted", {tasks: tasks, username: username}) -%>
+    <%- include("partials/myCompletedTask", {tasks: tasks, username: username}) -%>
+    <%- include("partials/myClaimedTask", {tasks: tasks, username: username}) -%>
+    <%- include("partials/claimTask", {tasks: tasks, username: username}) -%>
     <%- include("partials/addNewTask") -%>
 </div>
 

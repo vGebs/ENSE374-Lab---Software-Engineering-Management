@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 
 const taskSchema = new mongoose.Schema({
-    id: Number,
     text: String,
     state: String,
-    creator: Number,
+    creator: String,
     isTaskClaimed: Boolean,
-    claimingUser: Number,
+    claimingUser: String,
     isTaskDone: Boolean,
     isTaskCleared: Boolean
 });
